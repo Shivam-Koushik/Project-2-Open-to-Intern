@@ -1,9 +1,11 @@
+const mongoose = require('mongoose')
 
 const isValid = function (x) {
     if (typeof x === 'undefined' || x === null) return false
     if (typeof x === 'string' && x.trim().length === 0) return false
-    if (typeof x === 'string') return true
-    else  return false
+    let stringRegex = /^\w[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/
+    if(!stringRegex.test(x)) return false
+    return true
 }
 
 const isValidBody = function (y) {
@@ -16,8 +18,14 @@ const isValidEmail = function (y) {
 }
 
 const isValidMobile = function (y) {
-    let mobileRegex = /^([+]\d{2})?\d{10}$/
-    if (mobileRegex.test(y)) return true
+    
+   let mobileRegex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[0-9]\d{9}$/
+   if (mobileRegex.test(y)) return true
+}
+
+
+const isValidId = function(y){
+   return mongoose.Types.ObjectId.isValid(y) 
 }
 
 
@@ -25,3 +33,4 @@ module.exports.isValidBody = isValidBody
 module.exports.isValid = isValid
 module.exports.isValidEmail = isValidEmail
 module.exports.isValidMobile = isValidMobile
+module.exports.isValidId = isValidId
