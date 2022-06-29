@@ -21,7 +21,7 @@ const isValidEmail = function (y) {
 
 
 const isValidMobile = function (y) {
-    let mobileRegex = /^([+]\d{2})?\d{10}$/
+    let mobileRegex =/^(\+?\d{1,4}[\s-])?(?!0+\s+,?$)\d{10}\s*,?$/
     if (mobileRegex.test(y)) return true
 }
 
