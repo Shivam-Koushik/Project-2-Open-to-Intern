@@ -33,15 +33,15 @@ const createIntern = async function (req, res) {
         if (!validation.isValidBody(req.body)) return res.status(400).send({ status: false, message: "Please provide details for creation" })
 
         if (!name) return res.status(400).send({ status: false, message: "name is required" })
-        if (!validation.isValid(name)) return res.status(400).send({ status: false, message: "name is not in the valid formate" })
+        if (!validation.isValid(name)) return res.status(400).send({ status: false, message: "name is not in the valid format" })
 
         if (!email) return res.status(400).send({ status: false, message: "email is required" })
-        if (!validation.isValidEmail(email)) return res.status(400).send({ status: false, message: "provide valid email" })
+        if (!validation.isValidEmail(email)) return res.status(400).send({ status: false, message: "provide valid email e.g. example@example.com" })
         const Email = await internModel.findOne({ email: email })
         if (Email) return res.status(400).send({ status: false, message: "this email is already exist" })
 
         if (!mobile) return res.status(400).send({ status: false, message: "mobile is required" })
-        if (!validation.isValidMobile(mobile)) return res.status(400).send({ status: false, message: "provide valid mobile" })
+        if (!validation.isValidMobile(mobile)) return res.status(400).send({ status: false, message: "provide valid mobile , it should be a 10 digit number" })
         let Mobile = await internModel.findOne({ mobile: mobile })
         if (Mobile) return res.status(400).send({ status: false, message: "this mobile is already exist" })
 
