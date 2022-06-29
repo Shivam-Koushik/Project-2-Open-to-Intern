@@ -1,19 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
-const  mongoose = require('mongoose');
+const { default: mongoose } = require('mongoose');
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb+srv://ShivamKoushik:s%40H9663334444@cluster0.k1qkf.mongodb.net/Shivam4545-DB2?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://ShivamKoushik:s%40H9663334444@cluster0.k1qkf.mongodb.net/group70Database?retryWrites=true&w=majority", {
     useNewUrlParser: true
 })
-.then( () => console.log("MongoDb is connected"))
+.then( () => console.log("Hi shivam your mongoDb is connected"))
 .catch ( err => console.log(err) )
 
-app.use('/', route);
+app.use('/functionup/', route);
 
-app.listen( 3000, function () {
-    console.log('Express app running on port ' +  3000)
+
+app.listen(process.env.PORT || 3000, function () {
+    console.log('Express app running on port ' + (process.env.PORT || 3000))
 });
