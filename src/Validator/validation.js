@@ -3,26 +3,22 @@ const mongoose = require('mongoose')
 const isValid = function (x) {
     if (typeof x === 'undefined' || x === null) return false
     if (typeof x === 'string' && x.trim().length === 0) return false
-    let stringRegex = /^\w[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/
-    if(!stringRegex.test(x)) return false
     return true
 }
-
 
 const isValidBody = function (y) {
     return Object.keys(y).length > 0
 }
-
 
 const isValidEmail = function (y) {
     let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (emailRegex.test(y)) return true
 }
 
-
 const isValidMobile = function (y) {
-    let mobileRegex =/^(\+?\d{1,4}[\s-])?(?!0+\s+,?$)\d{10}\s*,?$/
-    if (mobileRegex.test(y)) return true
+    
+   let mobileRegex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[0-9]\d{9}$/
+   if (mobileRegex.test(y)) return true
 }
 
 
