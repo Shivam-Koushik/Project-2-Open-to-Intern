@@ -3,6 +3,8 @@ const { request } = require('express')
 const isValid = function (x) {
     if (typeof x === 'undefined' || x === null) return false
     if (typeof x === 'string' && x.trim().length === 0) return false
+    let stringRegex = /^\w[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/
+    if(!stringRegex.test(x)) return false
     return true
 }
 
@@ -24,7 +26,13 @@ const isValidMobile = function (y) {
 }
 
 
+const isValidId = function(y){
+    if(y===24) return true
+}
+
+
 module.exports.isValidBody = isValidBody
 module.exports.isValid = isValid
 module.exports.isValidEmail = isValidEmail
 module.exports.isValidMobile = isValidMobile
+module.exports.isValidId = isValidId
