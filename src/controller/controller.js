@@ -1,9 +1,6 @@
-const e = require('express')
-const collegeModel = require('../models/collegeModel')
-const internModel = require('../models/internModel')
-const validation = require('../Validator/validation')
-
-
+const collegeModel = require("../models/collegeModel.js")
+const internModel = require("../models/internModel.js")
+const validation = require('../validator/validation')
 const createColleges = async function (req, res) {
     try {
         let body = req.body
@@ -59,12 +56,18 @@ const createIntern = async function (req, res) {
 
 const collegeDetails = async function (req, res) {
     try {
-        let data = req.query
-        if (!validation.isValidBody(data)) return res.status(400).send({ status: false, message: "query not found" })
 
-        const collegeDetails = await internModel.find(data).select({ name: 1, email: 1, mobile: 1, collegeId: 1, _id: 0 }).populate(collegeId)
-        if (!collegeDetails) return res.status(404).send({ status: false, message: "Data not found" })
-        return res.status(200).send({ status: true, data: collegeDetails })
+        let data=req.query.collegeName
+        if (!validation.isValid(data))  return res.status(400).send({status: false , message: "Provide valid query"}) 
+        const college = await collegeModel.findOne({name:data})
+        if(!college) {
+            return res.status(404).send({status: false , message: "college not found"})
+        }
+        const  interns = await internModel.find({collegeId:college._id}).select({name: 1, email: 1, mobile :1 })
+        if(!interns) {
+            return res.status(404).send({status: false , message: "no interns found in given college"})
+        }
+        res.status(200).send({ status : true , "data": { "name": college.name, "fullName": college.fullName, "logoLink":college.logoLink, "interns": interns}}) 
 
     } catch (err) {
         return res.status(500).send({ status: false, message: err.message })

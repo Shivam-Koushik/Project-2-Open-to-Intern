@@ -1,4 +1,4 @@
-const { request } = require('express')
+const mongoose = require('mongoose')
 
 const isValid = function (x) {
     if (typeof x === 'undefined' || x === null) return false
@@ -27,7 +27,7 @@ const isValidMobile = function (y) {
 
 
 const isValidId = function(y){
-    if(y===24) return true
+   return mongoose.Types.ObjectId.isValid(y) 
 }
 
 
