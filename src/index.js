@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 mongoose.connect("mongodb+srv://ShivamKoushik:s%40H9663334444@cluster0.k1qkf.mongodb.net/group70Database?retryWrites=true&w=majority", {
     useNewUrlParser: true
 })
-.then( () => console.log("Hi shivam your mongoDb is connected"))
+.then( () => console.log("mongoDb is connected"))
 .catch ( err => console.log(err) )
 
 app.use('/functionup/', route);
