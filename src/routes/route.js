@@ -1,14 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const Controller = require("../controller/authorController")
-
-const auth = require("../middleware/auth")
+const Controller = require("../controller/controller")
 
 
-router.post('/functionup/colleges', authorController.createCollege)
+router.post("/colleges",Controller.createColleges)
+router.post("/intern",Controller.createIntern)
 
-router.post('/functionup/interns', auth.authenticate, Controller.createIntern)
-
-router.post("")
 
 module.exports = router;
