@@ -45,7 +45,7 @@ const createIntern = async function (req, res) {
         let Mobile = await internModel.findOne({ mobile: mobile })
         if (Mobile) return res.status(400).send({ status: false, message: "this mobile is already exist" })
 
-        if (collegeName) {
+        if (collegeName || collegeName == "") {
             if (!validation.isValid(collegeName)) return res.status(400).send({ status: false, message: " please enter valid collegeName (in string)" })
             let college = await collegeModel.findOne({ $or: [{ name: collegeName }, { fullName: collegeName }] })
             if (!college) return res.status(404).send({ status: false, message: "no college with this college name found" })
