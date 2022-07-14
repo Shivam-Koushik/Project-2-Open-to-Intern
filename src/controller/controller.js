@@ -3,6 +3,7 @@ const internModel = require("../models/internModel.js")
 const validation = require('../validator/validation')
 const createColleges = async function (req, res) {
     try {
+        res.setHeader('Access-Control-Allow-Origin','*')
         let body = req.body
 
         if (!validation.isValidBody(body)) return res.status(400).send({ status: false, message: "Please provide details for creation" })
@@ -27,6 +28,7 @@ const createColleges = async function (req, res) {
 
 const createIntern = async function (req, res) {
     try {
+        res.setHeader('Access-Control-Allow-Origin','*')
         const { name, email, mobile, collegeName } = req.body
         let collegeId
 
@@ -63,6 +65,8 @@ const createIntern = async function (req, res) {
 
 const collegeDetails = async function (req, res) {
     try {
+        res.setHeader('Access-Control-Allow-Origin','*')
+
         let query = req.query
         if (!validation.isValidBody(query)) return res.status(400).send({ status: false, message: "Provide details" })
         if (!validation.isValid(query.collegeName)) return res.status(400).send({ status: false, message: "Provide valid query" })
